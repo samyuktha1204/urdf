@@ -1,0 +1,83 @@
+<?xml version="1.0"?>
+<robot name="robot_arm">
+
+  <!-- Base -->
+  <link name="base_link">
+    <visual>
+      <geometry>
+        <cylinder radius="0.15" length="0.1"/>
+      </geometry>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <material name="grey">
+        <color rgba="0.5 0.5 0.5 1"/>
+      </material>
+    </visual>
+  </link>
+
+  <!-- Link 1 -->
+  <link name="link1">
+    <visual>
+      <geometry>
+        <cylinder radius="0.05" length="0.5"/>
+      </geometry>
+      <origin xyz="0 0 0.25" rpy="0 0 0"/>
+      <material name="blue">
+        <color rgba="0 0 1 1"/>
+      </material>
+    </visual>
+  </link>
+
+  <!-- Link 2 -->
+  <link name="link2">
+    <visual>
+      <geometry>
+        <cylinder radius="0.04" length="0.4"/>
+      </geometry>
+      <origin xyz="0 0 0.2" rpy="0 0 0"/>
+      <material name="green">
+        <color rgba="0 1 0 1"/>
+      </material>
+    </visual>
+  </link>
+
+  <!-- Gripper placeholder -->
+  <link name="gripper">
+    <visual>
+      <geometry>
+        <box size="0.1 0.1 0.05"/>
+      </geometry>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <material name="red">
+        <color rgba="1 0 0 1"/>
+      </material>
+    </visual>
+  </link>
+
+  <!-- Base rotation joint -->
+  <joint name="base_to_link1" type="revolute">
+    <parent link="base_link"/>
+    <child link="link1"/>
+    <origin xyz="0 0 0.05" rpy="0 0 0"/>
+    <axis xyz="0 0 1"/>
+    <limit lower="-3.14" upper="3.14" effort="10" velocity="2"/>
+  </joint>
+
+  <!-- Shoulder joint -->
+  <joint name="joint1" type="revolute">
+    <parent link="link1"/>
+    <child link="link2"/>
+    <origin xyz="0 0 0.5" rpy="0 0 0"/>
+    <axis xyz="0 1 0"/>
+    <limit lower="-1.57" upper="1.57" effort="5" velocity="2"/>
+  </joint>
+
+  <!-- Elbow joint -->
+  <joint name="joint2" type="revolute">
+    <parent link="link2"/>
+    <child link="gripper"/>
+    <origin xyz="0 0 0.4" rpy="0 0 0"/>
+    <axis xyz="0 1 0"/>
+    <limit lower="-1.57" upper="1.57" effort="5" velocity="2"/>
+  </joint>
+
+</robot>
